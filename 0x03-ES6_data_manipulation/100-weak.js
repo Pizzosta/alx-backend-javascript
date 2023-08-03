@@ -14,6 +14,6 @@ export function queryAPI(endpoint) {
 
   // If the endpoint has been called 5 or more times, throw an error indicating high load
   if (called + 1 >= 5) {
-    throw new Error("Endpoint load is high");
+    throw new Error('Endpoint load is high');
   }
 }
