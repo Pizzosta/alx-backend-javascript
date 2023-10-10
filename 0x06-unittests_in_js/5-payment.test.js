@@ -1,37 +1,27 @@
 const sinon = require('sinon');
-const chai = require('chai');
-const {expect} = chai;
-
-const Utils = require('./utils');
+const {expect} = require('chai');
 const sendPaymentRequestToApi = require('./5-payment');
 
 describe('sendPaymentRequestToApi', () => {
-  let calculateNumberStub;
-  let consoleLogSpy;
-
+  let sinoSpy;
   beforeEach(() => {
-    calculateNumberStub = sinon.stub(Utils, 'calculateNumber');
-    calculateNumberStub.returns(10);
-
-    consoleLogSpy = sinon.spy(console, 'log');
+    if (!sinoSpy) {
+      sinoSpy = sinon.spy(console);
+    }
   });
-
   afterEach(() => {
-    calculateNumberStub.restore();
-    consoleLogSpy.restore();
+    sinoSpy.log.resetHistory();
   });
 
-  it('should log the correct message when called with 100 and 20', () => {
+  it('sendPaymentRequestToApi(100, 20) should log "The total is: 120"', () => {
     sendPaymentRequestToApi(100, 20);
-
-    expect(consoleLogSpy.calledOnce).to.be.true;
-    expect(consoleLogSpy.calledWith('The total is: 120')).to.be.true;
+    expect(sinoSpy.log.calledWith('The total is: 120')).to.be.true;
+    expect(sinoSpy.log.calledOnce).to.be.true;
   });
 
-  it('should log the correct message when called with 10 and 10', () => {
+  it('sendPaymentRequestToApi(10, 10) should log "The total is: 20"', () => {
     sendPaymentRequestToApi(10, 10);
-
-    expect(consoleLogSpy.calledOnce).to.be.true;
-    expect(consoleLogSpy.calledWith('The total is: 20')).to.be.true;
+    expect(sinoSpy.log.calledWith('The total is: 20')).to.be.true;
+    expect(sinoSpy.log.calledOnce).to.be.true;
   });
 });
