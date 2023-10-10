@@ -7,6 +7,7 @@
         "eslint-config-google": "^0.14.0"
     },
     "dependencies": {
-        "chai": "^4.3.10"
+        "chai": "^4.3.10",
+        "sinon": "^16.1.0"
     }
 }
